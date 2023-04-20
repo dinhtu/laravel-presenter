@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Presenters\Admin\Category;
 
 use App\Http\Requests\Admin\Category\IndexRequest;
-use App\Repositories\Category\CategoryInterface;
 use Inertia\Inertia;
 use Inertia\Response;
 

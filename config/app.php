@@ -198,8 +198,9 @@ return [
         App\Providers\JetstreamServiceProvider::class,
         Krlove\EloquentModelGenerator\Provider\GeneratorServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
-        App\Providers\Admin\Category\RepositoryServiceProvider::class,
+        App\Providers\Admin\RepositoryServiceProvider::class,
         App\Providers\Admin\Category\PresenterServiceProvider::class,
+        App\Providers\Admin\Dashboard\PresenterServiceProvider::class,
 
 
     ],

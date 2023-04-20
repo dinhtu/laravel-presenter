@@ -2,89 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Presenters\Admin\Dashboard\Interfaces\IndexPresenter;
+use App\UseCases\Admin\Dashboard\IndexUseCase;
 use App\Http\Controllers\BaseController;
-use Illuminate\Http\Request;
-use Inertia\Inertia;
+use Inertia\Response;
 
 class DashboardController extends BaseController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return Inertia::render('Admin/Dashboard/Index', [
-            'data' => [
-                'title' => 'ホーム',
-            ],
-        ]);
-    }
+    public function index(
+        IndexPresenter $presenter,
+        IndexUseCase $useCase,
+    ): Response {
+        $useCase($presenter);
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return $presenter->render();
     }
 }
