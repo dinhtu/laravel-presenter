@@ -3,11 +3,14 @@
 namespace App\Repositories\User;
 
 use App\Components\CommonComponent;
+use App\Http\Requests\Admin\User\UserRequest;
 use App\Mail\ForgotPassComplete;
 use App\Mail\ForgotPassword;
 use App\Models\User;
 use App\Repositories\User\UserInterface;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -22,7 +25,7 @@ class UserRepository implements UserInterface
         $this->user = $user;
     }
 
-    public function get($request)
+    public function get(Request $request): LengthAwarePaginator
     {
         $newSizeLimit = CommonComponent::newListLimit($request);
         $userBuilder = $this->user;
@@ -43,7 +46,7 @@ class UserRepository implements UserInterface
         return $users;
     }
 
-    public function store($request)
+    public function store(UserRequest $request): bool
     {
         $this->user->name = $request->name;
         $this->user->email = $request->email;
@@ -52,12 +55,12 @@ class UserRepository implements UserInterface
         return $this->user->save();
     }
 
-    public function getById($id)
+    public function getById(int $id): User|null
     {
         return $this->user->where('id', $id)->first();
     }
 
-    public function update($request, $id)
+    public function update(UserRequest $request, int $id):bool
     {
         $userInfo = $this->user->where('id', $id)->first();
         if (! $userInfo) {
@@ -72,7 +75,7 @@ class UserRepository implements UserInterface
         return $userInfo->save();
     }
 
-    public function destroy($id)
+    public function destroy($id): bool
     {
         $user = $this->user->where('id', $id)->first();
         if (! $user) {
@@ -146,7 +149,7 @@ class UserRepository implements UserInterface
         return true;
     }
 
-    public function checkEmail($request)
+    public function checkEmail(Request $request): bool
     {
         return ! $this->user->where(function ($query) use ($request) {
             if (isset($request['id'])) {

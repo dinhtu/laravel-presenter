@@ -201,6 +201,7 @@ return [
         App\Providers\Admin\RepositoryServiceProvider::class,
         App\Providers\Admin\Category\PresenterServiceProvider::class,
         App\Providers\Admin\Dashboard\PresenterServiceProvider::class,
+        App\Providers\Admin\User\PresenterServiceProvider::class,
 
 
     ],

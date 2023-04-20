@@ -2,17 +2,22 @@
 
 namespace App\Repositories\User;
 
+use App\Http\Requests\Admin\User\UserRequest;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+
 interface UserInterface
 {
-    public function get($request);
+    public function get(Request $request): LengthAwarePaginator;
 
-    public function getById($id);
+    public function getById(int $id): User|null;
 
-    public function store($request);
+    public function store(UserRequest $request):bool;
 
-    public function update($request, $id);
+    public function update(UserRequest $request, int $id): bool;
 
-    public function destroy($id);
+    public function destroy(int $id): bool;
 
     public function saveLoginHistory();
 
@@ -24,5 +29,5 @@ interface UserInterface
 
     public function updatePasswordByToken($request, $token);
 
-    public function checkEmail($request);
+    public function checkEmail(Request $request): bool;
 }
