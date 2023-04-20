@@ -41,15 +41,3 @@ Route::group([
     Route::resource('category', CategoryController::class);
     Route::post('check-email', [UserController::class, 'checkEmail'])->name('user.checkEmail');
 });
-
-Route::group([
-    'middleware' => ['user'],
-    'as' => 'user.',
-], function () {
-    Route::resource('home', HomeController::class);
-});
-Route::group([
-    'middleware' => ['lp'],
-], function () {
-    Route::resource('top', TopController::class);
-});
